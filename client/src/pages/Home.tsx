@@ -139,7 +139,7 @@ export default function Home() {
         </div>
         
         <div className="container relative z-10 text-center py-20">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient-gold">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-primary">
             MAGNATA DO MARKETING DIGITAL
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
@@ -168,7 +168,7 @@ export default function Home() {
       {/* Services Section */}
       <section id="services" className="py-20 bg-card">
         <div className="container">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gradient-gold">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-primary">
             Nossos Serviços
           </h2>
           <p className="text-center text-muted-foreground mb-16 text-lg max-w-2xl mx-auto">
@@ -185,7 +185,7 @@ export default function Home() {
                   <div className="text-primary mb-6 group-hover:scale-110 transition-transform">
                     {service.icon}
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gradient-gold">
+                  <h3 className="text-2xl font-bold mb-4 text-primary">
                     {service.title}
                   </h3>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -211,7 +211,7 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
-              <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Tráfego Pago de Alta Performance</h3>
+              <h3 className="text-3xl font-bold mb-6 text-primary">Tráfego Pago de Alta Performance</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Desenvolvemos campanhas de tráfego pago altamente segmentadas e otimizadas para maximizar seu retorno sobre investimento. Utilizamos as melhores práticas do mercado e análise de dados em tempo real para garantir que cada centavo investido gere resultados mensuráveis.
               </p>
@@ -237,7 +237,7 @@ export default function Home() {
               />
             </div>
             <div className="order-1 lg:order-2">
-              <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Tráfego Orgânico Estratégico</h3>
+              <h3 className="text-3xl font-bold mb-6 text-primary">Tráfego Orgânico Estratégico</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Construímos uma presença digital sólida e duradoura através de estratégias de SEO avançadas e marketing de conteúdo de alta qualidade. Nosso objetivo é posicionar sua marca no topo dos resultados de busca, gerando tráfego qualificado de forma orgânica e sustentável.
               </p>
@@ -249,7 +249,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
-              <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Criação de Vídeos com Inteligência Artificial</h3>
+              <h3 className="text-3xl font-bold mb-6 text-primary">Criação de Vídeos com Inteligência Artificial</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Utilizamos tecnologia de ponta em inteligência artificial para criar vídeos profissionais, envolventes e de alta qualidade em tempo recorde. Nossa solução permite produzir conteúdo visual impactante que captura a atenção do seu público e impulsiona o engajamento.
               </p>
@@ -275,7 +275,7 @@ export default function Home() {
               />
             </div>
             <div className="order-1 lg:order-2">
-              <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Especialistas em Marketing Digital para Clínica Odontológica</h3>
+              <h3 className="text-3xl font-bold mb-6 text-primary">Especialistas em Marketing Digital para Clínica Odontológica</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Somos especialistas em marketing digital para o setor odontológico. Entendemos as particularidades do mercado e desenvolvemos estratégias específicas para atrair mais pacientes, fortalecer sua autoridade e aumentar a visibilidade da sua clínica.
               </p>
@@ -291,7 +291,7 @@ export default function Home() {
       <section id="contact" className="py-20 bg-card">
         <div className="container max-w-4xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-gold">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
               Faça Seu Orçamento Gratuito
             </h2>
             <p className="text-muted-foreground text-lg">
