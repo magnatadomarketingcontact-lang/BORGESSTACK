@@ -62,3 +62,4 @@
 - [ ] Implementar webhooks de pagamento
 - [ ] Adicionar confirmação de pagamento
 - [x] Ajustar cores para amarelo vibrante como na imagem de referência
+- [x] Corrigir cores vermelhas que aparecem quando o site é publicado
