@@ -18,8 +18,30 @@ import {
 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach(el => observer.observe(el));
+
+    return () => {
+      elements.forEach(el => observer.unobserve(el));
+    };
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -155,9 +177,9 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card 
-                key={index} 
-                className="bg-background border-border hover:border-primary transition-all duration-300 hover:glow-gold group"
+              <Card
+                key={index}
+                className="animate-on-scroll bg-background border-border hover:border-primary transition-all duration-300 hover:glow-gold group"
               >
                 <CardContent className="p-8">
                   <div className="text-primary mb-6 group-hover:scale-110 transition-transform">
@@ -380,14 +402,14 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-background border-t border-border py-12">
+      <footer className="bg-background border-t border-border py-12 animate-on-scroll">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 animate-on-scroll">
+            <div className="animate-on-scroll">
               <img 
                 src="/logo-magnata.jpg" 
                 alt="Magnata do Marketing Digital" 
-                className="h-40 mb-4 object-contain"
+                className="h-40 mb-4 object-contain footer-animate"
               />
               <p className="text-muted-foreground text-sm">
                 Transformando negócios através de estratégias digitais inovadoras e resultados mensuráveis.

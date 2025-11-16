@@ -242,3 +242,93 @@ html {
 .whatsapp-pulse {
   animation: pulse-glow 2s infinite;
 }
+
+/* Scroll animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 10px oklch(0.75 0.15 85 / 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px oklch(0.75 0.15 85 / 0.8), 0 0 30px oklch(0.75 0.15 85 / 0.3);
+  }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-out;
+}
+
+.animate-on-scroll.in-view {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideInUp 0.6s ease-out;
+}
+
+.animate-on-scroll.in-view:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.animate-on-scroll.in-view:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.animate-on-scroll.in-view:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.animate-on-scroll.in-view:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.animate-on-scroll.in-view:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+.footer-animate {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
