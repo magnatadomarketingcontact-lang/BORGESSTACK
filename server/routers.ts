@@ -26,6 +26,7 @@ export const appRouter = router({
           name: z.string().min(1, "Nome é obrigatório"),
           phone: z.string().min(1, "Telefone é obrigatório"),
           email: z.string().email("Email inválido"),
+          service: z.string().min(1, "Selecione um serviço"),
           message: z.string().min(1, "Mensagem é obrigatória"),
         })
       )
@@ -36,6 +37,7 @@ export const appRouter = router({
             name: input.name,
             phone: input.phone,
             email: input.email,
+            service: input.service,
             message: input.message,
           });
 

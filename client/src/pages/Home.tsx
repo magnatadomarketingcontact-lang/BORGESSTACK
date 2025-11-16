@@ -24,13 +24,14 @@ export default function Home() {
     name: "",
     phone: "",
     email: "",
+    service: "",
     message: ""
   });
 
   const contactMutation = trpc.contact.submit.useMutation({
     onSuccess: () => {
       toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
-      setFormData({ name: "", phone: "", email: "", message: "" });
+      setFormData({ name: "", phone: "", email: "", service: "", message: "" });
     },
     onError: (error: unknown) => {
       toast.error("Erro ao enviar mensagem. Tente novamente.");
@@ -41,7 +42,7 @@ export default function Home() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.phone || !formData.email || !formData.message) {
+    if (!formData.name || !formData.phone || !formData.email || !formData.service || !formData.message) {
       toast.error("Por favor, preencha todos os campos.");
       return;
     }
@@ -322,6 +323,25 @@ export default function Home() {
                     className="bg-input border-border"
                     required
                   />
+                </div>
+
+                <div>
+                  <label htmlFor="service" className="block text-sm font-medium mb-2">
+                    Qual serviço você está interessado? *
+                  </label>
+                  <select
+                    id="service"
+                    value={formData.service}
+                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    className="w-full px-4 py-2 bg-input border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    required
+                  >
+                    <option value="">Selecione um serviço...</option>
+                    <option value="Tráfego Pago">Tráfego Pago</option>
+                    <option value="Tráfego Orgânico">Tráfego Orgânico</option>
+                    <option value="Vídeos com IA">Vídeos com IA</option>
+                    <option value="Marketing para Clínicas Odontológicas">Marketing para Clínicas Odontológicas</option>
+                  </select>
                 </div>
 
                 <div>

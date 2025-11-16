@@ -33,6 +33,7 @@ export const contacts = mysqlTable("contacts", {
   name: varchar("name", { length: 255 }).notNull(),
   phone: varchar("phone", { length: 50 }).notNull(),
   email: varchar("email", { length: 320 }).notNull(),
+  service: varchar("service", { length: 100 }).notNull(),
   message: text("message").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
