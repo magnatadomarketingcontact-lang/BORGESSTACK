@@ -47,3 +47,4 @@
 ## Correções
 - [x] Corrigir número do WhatsApp de 8599126516 para 85991126516
 - [x] Adicionar logomarca tipográfica no rodapé
+- [x] Alterar "Diagnóstico Gratuito" para "Orçamento Gratuito"

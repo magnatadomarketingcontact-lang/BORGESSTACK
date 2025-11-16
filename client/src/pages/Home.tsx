@@ -128,7 +128,7 @@ export default function Home() {
               className="bg-primary hover:bg-primary/90 text-primary-foreground glow-gold text-lg px-8 py-6"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Solicitar Diagnóstico Gratuito
+              Solicitar orçamento Gratuito
             </Button>
             <Button 
               size="lg" 
@@ -269,7 +269,7 @@ export default function Home() {
         <div className="container max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-gold">
-              Solicite Seu Diagnóstico Gratuito
+              Faça Seu Orçamento Gratuito
             </h2>
             <p className="text-muted-foreground text-lg">
               Preencha o formulário abaixo e nossa equipe entrará em contato para entender suas necessidades e apresentar as melhores soluções
