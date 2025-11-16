@@ -253,7 +253,7 @@ export default function Home() {
               />
             </div>
             <div className="order-1 lg:order-2">
-              <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Especialistas em Marketing para Clínicas Odontológicas</h3>
+              <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Especialistas em Marketing Digital para Clínica Odontológica</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Somos especialistas em marketing digital para o setor odontológico. Entendemos as particularidades do mercado e desenvolvemos estratégias específicas para atrair mais pacientes, fortalecer sua autoridade e aumentar a visibilidade da sua clínica.
               </p>
@@ -340,7 +340,7 @@ export default function Home() {
                     <option value="Tráfego Pago">Tráfego Pago</option>
                     <option value="Tráfego Orgânico">Tráfego Orgânico</option>
                     <option value="Vídeos com IA">Vídeos com IA</option>
-                    <option value="Marketing para Clínicas Odontológicas">Marketing para Clínicas Odontológicas</option>
+                    <option value="Marketing Digital para Clínica Odontológica">Marketing Digital para Clínica Odontológica</option>
                   </select>
                 </div>
 
