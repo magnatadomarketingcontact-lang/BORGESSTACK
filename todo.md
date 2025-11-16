@@ -43,3 +43,6 @@
 - [x] Testar botão WhatsApp
 - [x] Testar responsividade em diferentes dispositivos
 - [x] Criar checkpoint final
+
+## Correções
+- [x] Corrigir número do WhatsApp de 8599126516 para 85991126516

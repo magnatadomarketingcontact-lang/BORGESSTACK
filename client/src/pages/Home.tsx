@@ -92,7 +92,7 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground">
       {/* WhatsApp Fixed Button */}
       <a
-        href="https://wa.me/558599126516"
+        href="https://wa.me/5585991126516"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform whatsapp-pulse"
@@ -389,7 +389,7 @@ export default function Home() {
               <ul className="space-y-3">
                 <li className="flex items-center gap-2 text-muted-foreground">
                   <Phone className="w-4 h-4 text-primary" />
-                  <a href="https://wa.me/558599126516" className="hover:text-primary transition-colors">
+                  <a href="https://wa.me/5585991126516" className="hover:text-primary transition-colors">
                     (85) 9 9126-6516
                   </a>
                 </li>
