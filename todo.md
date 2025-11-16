@@ -49,3 +49,4 @@
 - [x] Adicionar logomarca tipográfica no rodapé
 - [x] Alterar "Diagnóstico Gratuito" para "Orçamento Gratuito"
 - [x] Adicionar campo de seleção de serviços no formulário
+- [x] Alterar cores vermelhas para amarelo em todo o site
