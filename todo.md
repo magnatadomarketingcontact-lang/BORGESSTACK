@@ -53,3 +53,12 @@
 - [x] Alterar "Marketing para Clínicas Odontológicas" para "Marketing Digital para Clínica Odontológica"
 - [x] Criar animações tecnológicas ao rolar o site
 - [x] Corrigir cores vermelhas restantes para amarelo
+
+## Integração Stripe
+- [ ] Configurar Stripe no projeto
+- [ ] Criar schema de produtos e pedidos
+- [ ] Implementar página de produtos/serviços
+- [ ] Criar checkout com Stripe
+- [ ] Implementar webhooks de pagamento
+- [ ] Adicionar confirmação de pagamento
+- [x] Ajustar cores para amarelo vibrante como na imagem de referência
