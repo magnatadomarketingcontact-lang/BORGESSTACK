@@ -52,3 +52,4 @@
 - [x] Alterar cores vermelhas para amarelo em todo o site
 - [x] Alterar "Marketing para Clínicas Odontológicas" para "Marketing Digital para Clínica Odontológica"
 - [x] Criar animações tecnológicas ao rolar o site
+- [x] Corrigir cores vermelhas restantes para amarelo
