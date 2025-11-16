@@ -66,3 +66,5 @@
 - [x] Adicionar fonte geométrica futurista
 - [x] Remover gradiente de texto que causa cor vermelha
 - [x] Aplicar cor amarela sólida aos títulos
+- [x] Verificar se formulário envia para magnatadomarketingcontact@gmail.com
+- [x] Corrigir problema de envio de emails do formulário
