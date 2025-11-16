@@ -364,10 +364,12 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="text-2xl font-bold mb-4 text-gradient-gold">
-                Magnata do Marketing Digital
-              </h3>
-              <p className="text-muted-foreground">
+              <img 
+                src="/logo-magnata.jpg" 
+                alt="Magnata do Marketing Digital" 
+                className="h-40 mb-4 object-contain"
+              />
+              <p className="text-muted-foreground text-sm">
                 Transformando negócios através de estratégias digitais inovadoras e resultados mensuráveis.
               </p>
             </div>
