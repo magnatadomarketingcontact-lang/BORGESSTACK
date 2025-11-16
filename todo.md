@@ -68,3 +68,4 @@
 - [x] Aplicar cor amarela sólida aos títulos
 - [x] Verificar se formulário envia para magnatadomarketingcontact@gmail.com
 - [x] Corrigir problema de envio de emails do formulário
+- [x] Implementar sistema de notificações built-in para leads
