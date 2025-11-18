@@ -69,3 +69,5 @@
 - [x] Verificar se formulário envia para magnatadomarketingcontact@gmail.com
 - [x] Corrigir problema de envio de emails do formulário
 - [x] Implementar sistema de notificações built-in para leads
+- [x] Atualizar paleta de cores com cores oficiais
+- [x] Remover fundo branco da logo no rodapé
