@@ -72,3 +72,4 @@
 - [x] Atualizar paleta de cores com cores oficiais
 - [x] Remover fundo branco da logo no rodapé
 - [x] Remover fundo branco da logo e salvar como PNG transparente
+- [x] Substituir logo atual pela nova imagem fornecida
