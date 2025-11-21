@@ -5,7 +5,6 @@ import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import { createContact } from "./db";
 import { sendContactEmail } from "./email";
-import { notifyOwner } from "./_core/notification";
 
 export const appRouter = router({
   system: systemRouter,
@@ -47,16 +46,6 @@ export const appRouter = router({
 
           if (!emailSent) {
             console.warn("Email não foi enviado, mas contato foi salvo no banco");
-          }
-
-          // Enviar notificação built-in ao proprietário
-          try {
-            await notifyOwner({
-              title: `Novo Lead: ${input.name}`,
-              content: `Serviço: ${input.service}\nTelefone: ${input.phone}\nEmail: ${input.email}\nMensagem: ${input.message}`
-            });
-          } catch (notificationError) {
-            console.error("Erro ao enviar notificação:", notificationError);
           }
 
           return {
