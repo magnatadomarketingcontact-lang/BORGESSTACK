@@ -71,3 +71,7 @@
 - [x] Implementar sistema de notificações built-in para leads
 - [x] Atualizar paleta de cores com cores oficiais
 - [x] Remover fundo branco da logo no rodapé
+
+## Atualizações Recentes
+- [x] Reverter para versão 8109c94e
+- [x] Adicionar Instagram na seção de Contato

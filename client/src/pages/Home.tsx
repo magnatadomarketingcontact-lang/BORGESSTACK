@@ -14,7 +14,8 @@ import {
   MessageCircle,
   Mail,
   Phone,
-  Send
+  Send,
+  Instagram
 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
@@ -441,6 +442,12 @@ export default function Home() {
                   <Mail className="w-4 h-4 text-primary" />
                   <a href="mailto:magnatadomarketingcontact@gmail.com" className="hover:text-primary transition-colors">
                     magnatadomarketingcontact@gmail.com
+                  </a>
+                </li>
+                <li className="flex items-center gap-2 text-muted-foreground">
+                  <Instagram className="w-4 h-4 text-primary" />
+                  <a href="https://www.instagram.com/guilherme__magnata?igsh=eXJtZzFmcGhkOHdy" className="hover:text-primary transition-colors">
+                    Instagram
                   </a>
                 </li>
               </ul>
