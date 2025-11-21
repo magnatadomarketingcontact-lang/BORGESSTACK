@@ -407,7 +407,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 animate-on-scroll">
             <div className="animate-on-scroll">
               <img 
-                src="/logo-magnata.png" 
+                src="/logo-magnata.jpg" 
                 alt="Magnata do Marketing Digital" 
                 className="h-40 mb-4 object-contain footer-animate"
               />
