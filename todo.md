@@ -75,3 +75,4 @@
 ## Atualizações Recentes
 - [x] Reverter para versão 8109c94e
 - [x] Adicionar Instagram na seção de Contato
+- [x] Corrigir erro de carregamento da pré-visualização
