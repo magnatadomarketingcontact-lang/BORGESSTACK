@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,11 +14,12 @@ import {
   MessageCircle,
   Mail,
   Phone,
-  Send
+  Send,
+  Instagram
 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   useEffect(() => {
@@ -407,7 +408,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 animate-on-scroll">
             <div className="animate-on-scroll">
               <img 
-                src="/logo-magnata.jpg" 
+                src="/logo-magnata-novo.png" 
                 alt="Magnata do Marketing Digital" 
                 className="h-40 mb-4 object-contain footer-animate"
               />
@@ -441,6 +442,12 @@ export default function Home() {
                   <Mail className="w-4 h-4 text-primary" />
                   <a href="mailto:magnatadomarketingcontact@gmail.com" className="hover:text-primary transition-colors">
                     magnatadomarketingcontact@gmail.com
+                  </a>
+                </li>
+                <li className="flex items-center gap-2 text-muted-foreground">
+                  <Instagram className="w-4 h-4 text-primary" />
+                  <a href="https://www.instagram.com/guilherme__magnata?igsh=eXJtZzFmcGhkOHdy" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                    Instagram
                   </a>
                 </li>
               </ul>

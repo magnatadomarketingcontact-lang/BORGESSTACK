@@ -63,3 +63,7 @@
 - [ ] Adicionar confirmação de pagamento
 - [x] Ajustar cores para amarelo vibrante como na imagem de referência
 - [x] Corrigir cores vermelhas que aparecem quando o site é publicado
+- [ ] Substituir logo acima do texto "Transformando negócios..."
+- [ ] Adicionar Instagram na seção de Contato com link correto
+- [ ] Configurar e testar formulário
+- [ ] Verificar se link do Instagram abre corretamente
