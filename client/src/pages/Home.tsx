@@ -432,20 +432,20 @@ export default function Home() {
             <div>
               <h4 className="text-lg font-semibold mb-4 text-primary">Contato</h4>
               <ul className="space-y-3">
-                <li className="flex items-center gap-2 text-muted-foreground">
-                  <Phone className="w-4 h-4 text-primary" />
-                  <a href="https://wa.me/5585991126516" className="hover:text-primary transition-colors">
+                <li className="flex items-center gap-2 text-muted-foreground flex-wrap">
+                  <Phone className="w-4 h-4 text-primary flex-shrink-0" />
+                  <a href="https://wa.me/5585991126516" className="hover:text-primary transition-colors break-all">
                     (85) 9 9126-6516
                   </a>
                 </li>
-                <li className="flex items-center gap-2 text-muted-foreground">
-                  <Mail className="w-4 h-4 text-primary" />
-                  <a href="mailto:magnatadomarketingcontact@gmail.com" className="hover:text-primary transition-colors">
+                <li className="flex items-center gap-2 text-muted-foreground flex-wrap">
+                  <Mail className="w-4 h-4 text-primary flex-shrink-0" />
+                  <a href="mailto:magnatadomarketingcontact@gmail.com" className="hover:text-primary transition-colors break-all">
                     magnatadomarketingcontact@gmail.com
                   </a>
                 </li>
                 <li className="flex items-center gap-2 text-muted-foreground">
-                  <Instagram className="w-4 h-4 text-primary" />
+                  <Instagram className="w-4 h-4 text-primary flex-shrink-0" />
                   <a href="https://www.instagram.com/guilherme__magnata?igsh=eXJtZzFmcGhkOHdy" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                     Instagram
                   </a>
