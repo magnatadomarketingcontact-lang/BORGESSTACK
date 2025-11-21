@@ -172,7 +172,7 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gradient-gold">
             Nossos Serviços
           </h2>
-          <p className="text-center text-foreground mb-16 text-lg max-w-2xl mx-auto">
+          <p className="text-center text-muted-foreground mb-16 text-lg max-w-2xl mx-auto">
             Soluções completas de marketing digital para impulsionar seu negócio ao próximo nível
           </p>
           
@@ -189,12 +189,12 @@ export default function Home() {
                   <h3 className="text-2xl font-bold mb-4 text-gradient-gold">
                     {service.title}
                   </h3>
-                  <p className="text-foreground mb-6 leading-relaxed">
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
                     {service.description}
                   </p>
                   <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-sm text-foreground">
+                      <li key={idx} className="flex items-center gap-2 text-sm">
                         <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
                         <span>{feature}</span>
                       </li>
@@ -213,10 +213,10 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
               <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Tráfego Pago de Alta Performance</h3>
-              <p className="text-foreground mb-4 leading-relaxed">
+              <p className="text-muted-foreground mb-4 leading-relaxed">
                 Desenvolvemos campanhas de tráfego pago altamente segmentadas e otimizadas para maximizar seu retorno sobre investimento. Utilizamos as melhores práticas do mercado e análise de dados em tempo real para garantir que cada centavo investido gere resultados mensuráveis.
               </p>
-              <p className="text-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 Nossa expertise abrange Google Ads, Facebook Ads, Instagram Ads e outras plataformas, sempre com foco em conversão e crescimento sustentável do seu negócio.
               </p>
             </div>
@@ -239,10 +239,10 @@ export default function Home() {
             </div>
             <div className="order-1 lg:order-2">
               <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Tráfego Orgânico Estratégico</h3>
-              <p className="text-foreground mb-4 leading-relaxed">
+              <p className="text-muted-foreground mb-4 leading-relaxed">
                 Construímos uma presença digital sólida e duradoura através de estratégias de SEO avançadas e marketing de conteúdo de alta qualidade. Nosso objetivo é posicionar sua marca no topo dos resultados de busca, gerando tráfego qualificado de forma orgânica e sustentável.
               </p>
-              <p className="text-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 Combinamos técnicas de otimização on-page, off-page e criação de conteúdo relevante para construir autoridade digital e atrair seu público ideal.
               </p>
             </div>
@@ -251,10 +251,10 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
               <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Criação de Vídeos com Inteligência Artificial</h3>
-              <p className="text-foreground mb-4 leading-relaxed">
+              <p className="text-muted-foreground mb-4 leading-relaxed">
                 Utilizamos tecnologia de ponta em inteligência artificial para criar vídeos profissionais, envolventes e de alta qualidade em tempo recorde. Nossa solução permite produzir conteúdo visual impactante que captura a atenção do seu público e impulsiona o engajamento.
               </p>
-              <p className="text-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 Do roteiro à edição final, nossa equipe combina criatividade humana com o poder da IA para entregar vídeos que convertem e fortalecem sua marca no ambiente digital.
               </p>
             </div>
@@ -277,10 +277,10 @@ export default function Home() {
             </div>
             <div className="order-1 lg:order-2">
               <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Especialistas em Marketing Digital para Clínica Odontológica</h3>
-              <p className="text-foreground mb-4 leading-relaxed">
+              <p className="text-muted-foreground mb-4 leading-relaxed">
                 Somos especialistas em marketing digital para o setor odontológico. Entendemos as particularidades do mercado e desenvolvemos estratégias específicas para atrair mais pacientes, fortalecer sua autoridade e aumentar a visibilidade da sua clínica.
               </p>
-              <p className="text-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 Nossa abordagem combina captação de leads qualificados, gestão de reputação online, marketing de conteúdo especializado e campanhas de tráfego pago direcionadas para transformar sua clínica em referência na região.
               </p>
             </div>
@@ -295,7 +295,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-gold">
               Faça Seu Orçamento Gratuito
             </h2>
-            <p className="text-foreground text-lg">
+            <p className="text-muted-foreground text-lg">
               Preencha o formulário abaixo e nossa equipe entrará em contato para entender suas necessidades e apresentar as melhores soluções
             </p>
           </div>
@@ -412,14 +412,14 @@ export default function Home() {
                 alt="Magnata do Marketing Digital" 
                 className="h-40 mb-4 object-contain footer-animate"
               />
-              <p className="text-foreground text-sm">
+              <p className="text-muted-foreground text-sm">
                 Transformando negócios através de estratégias digitais inovadoras e resultados mensuráveis.
               </p>
             </div>
             
             <div>
               <h4 className="text-lg font-semibold mb-4 text-primary">Serviços</h4>
-              <ul className="space-y-2 text-foreground">
+              <ul className="space-y-2 text-muted-foreground">
                 <li>Tráfego Pago</li>
                 <li>Tráfego Orgânico</li>
                 <li>Vídeos com IA</li>
@@ -432,20 +432,20 @@ export default function Home() {
             <div>
               <h4 className="text-lg font-semibold mb-4 text-primary">Contato</h4>
               <ul className="space-y-3">
-                <li className="flex items-center gap-2 text-foreground flex-wrap">
-                  <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                  <a href="https://wa.me/5585991126516" className="hover:text-primary transition-colors break-all">
+                <li className="flex items-center gap-2 text-muted-foreground">
+                  <Phone className="w-4 h-4 text-primary" />
+                  <a href="https://wa.me/5585991126516" className="hover:text-primary transition-colors">
                     (85) 9 9126-6516
                   </a>
                 </li>
-                <li className="flex items-center gap-2 text-foreground flex-wrap">
-                  <Mail className="w-4 h-4 text-primary flex-shrink-0" />
-                  <a href="mailto:magnatadomarketingcontact@gmail.com" className="hover:text-primary transition-colors break-all">
+                <li className="flex items-center gap-2 text-muted-foreground">
+                  <Mail className="w-4 h-4 text-primary" />
+                  <a href="mailto:magnatadomarketingcontact@gmail.com" className="hover:text-primary transition-colors">
                     magnatadomarketingcontact@gmail.com
                   </a>
                 </li>
-                <li className="flex items-center gap-2 text-foreground">
-                  <Instagram className="w-4 h-4 text-primary flex-shrink-0" />
+                <li className="flex items-center gap-2 text-muted-foreground">
+                  <Instagram className="w-4 h-4 text-primary" />
                   <a href="https://www.instagram.com/guilherme__magnata?igsh=eXJtZzFmcGhkOHdy" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                     Instagram
                   </a>
@@ -454,7 +454,7 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="border-t border-border pt-8 text-center text-foreground">
+          <div className="border-t border-border pt-8 text-center text-muted-foreground">
             <p>&copy; {new Date().getFullYear()} Magnata do Marketing Digital. Todos os direitos reservados.</p>
           </div>
         </div>
