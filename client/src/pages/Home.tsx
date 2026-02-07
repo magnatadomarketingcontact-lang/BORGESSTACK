@@ -364,6 +364,9 @@ export default function Home() {
                     <option value="Tráfego Orgânico">Tráfego Orgânico</option>
                     <option value="Vídeos com IA">Vídeos com IA</option>
                     <option value="Marketing Digital para Clínica Odontológica">Marketing Digital para Clínica Odontológica</option>
+                    <option value="Criar uma Landing page">Criar uma Landing page</option>
+                    <option value="CRM com Dashboard Avançado">CRM com Dashboard Avançado</option>
+                    <option value="Mentoria Estratégica">Mentoria Estratégica</option>
                   </select>
                 </div>
 
