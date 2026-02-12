@@ -437,7 +437,7 @@ export default function Home() {
               <ul className="space-y-3">
                 <li className="flex items-center gap-2 text-muted-foreground">
                   <Phone className="w-4 h-4 text-primary" />
-                  <a href="https://wa.me/5585991778762" className="hover:text-primary transition-colors">
+                  <a href="https://api.whatsapp.com/send/?phone=5585991778762&text&type=phone_number&app_absent=0" className="hover:text-primary transition-colors">
                     (85) 9 9177-8762
                   </a>
                 </li>
