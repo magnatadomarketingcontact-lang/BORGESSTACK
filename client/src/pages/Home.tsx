@@ -15,7 +15,8 @@ import {
   Mail,
   Phone,
   Send,
-  Instagram
+  Instagram,
+  MessageSquare
 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
@@ -122,7 +123,7 @@ export default function Home() {
         className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform whatsapp-pulse"
         aria-label="Contato via WhatsApp"
       >
-        <MessageCircle className="w-8 h-8" />
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.946 1.347l-.355.201-3.68-.965.984 3.595-.235.374a9.86 9.86 0 001.455 5.92 9.88 9.88 0 007.581 3.986h.005c2.917 0 5.649-1.201 7.652-3.369l.36-.355 3.595.984-.96-3.68.374-.235a9.87 9.87 0 00-1.457-5.92 9.879 9.879 0 00-7.589-3.983z"/></svg>
       </a>
 
       {/* Hero Section */}
@@ -452,7 +453,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-2 text-muted-foreground">
                   <Instagram className="w-4 h-4 text-accent" />
-                  <a href="https://www.instagram.com/guilherme__magnata?igsh=eXJtZzFmcGhkOHdy" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors text-sm">
+                  <a href="https://www.instagram.com/borgesstack?igsh=eXJtZzFmcGhkOHdy" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors text-sm">
                     Instagram
                   </a>
                 </li>
