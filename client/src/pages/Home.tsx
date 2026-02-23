@@ -140,27 +140,27 @@ export default function Home() {
         </div>
         
         <div className="container relative z-10 text-center py-20">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient-gold">
-            MAGNATA DO MARKETING DIGITAL
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient-silver tracking-widest">
+            BORGES STACK<br />BUSINESS
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Transforme sua presença digital em resultados extraordinários com estratégias de marketing de alta performance
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto font-light tracking-wide">
+            Arquitetura Digital Estratégica | Marketing + Tecnologia + Segurança
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground glow-gold text-lg px-8 py-6"
+              className="bg-accent hover:bg-accent/90 text-accent-foreground glow-silver text-lg px-8 py-6 border border-accent/50 hover:border-accent"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Solicitar orçamento Gratuito
+              Solicitar Orçamento
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-primary text-primary hover:bg-primary/10 text-lg px-8 py-6"
+              className="border-accent text-accent hover:bg-accent/10 text-lg px-8 py-6 hover:glow-subtle"
               onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Conheça Nossos Serviços
+              Explorar Serviços
             </Button>
           </div>
         </div>
@@ -169,24 +169,24 @@ export default function Home() {
       {/* Services Section */}
       <section id="services" className="py-20 bg-card">
         <div className="container">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gradient-gold">
-            Nossos Serviços
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gradient-silver tracking-wide">
+            Soluções Estratégicas
           </h2>
-          <p className="text-center text-muted-foreground mb-16 text-lg max-w-2xl mx-auto">
-            Soluções completas de marketing digital para impulsionar seu negócio ao próximo nível
+          <p className="text-center text-muted-foreground mb-16 text-lg max-w-2xl mx-auto font-light">
+            Serviços integrados de marketing digital, desenvolvimento e segurança
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <Card
                 key={index}
-                className="animate-on-scroll bg-background border-border hover:border-primary transition-all duration-300 hover:glow-gold group"
+                className="animate-on-scroll bg-card border border-glow hover:border-accent transition-all duration-300 hover:glow-subtle group"
               >
                 <CardContent className="p-8">
-                  <div className="text-primary mb-6 group-hover:scale-110 transition-transform">
+                  <div className="text-accent mb-6 group-hover:scale-110 transition-transform">
                     {service.icon}
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gradient-gold">
+                  <h3 className="text-2xl font-bold mb-4 text-gradient-silver">
                     {service.title}
                   </h3>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -195,8 +195,8 @@ export default function Home() {
                   <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2 text-sm">
-                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span>{feature}</span>
+                        <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
+                        <span className="text-foreground/80">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -212,7 +212,7 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
-              <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Tráfego Pago de Alta Performance</h3>
+              <h3 className="text-3xl font-bold mb-6 text-gradient-silver">Tráfego Pago de Alta Performance</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Desenvolvemos campanhas de tráfego pago altamente segmentadas e otimizadas para maximizar seu retorno sobre investimento. Utilizamos as melhores práticas do mercado e análise de dados em tempo real para garantir que cada centavo investido gere resultados mensuráveis.
               </p>
@@ -238,7 +238,7 @@ export default function Home() {
               />
             </div>
             <div className="order-1 lg:order-2">
-              <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Tráfego Orgânico Estratégico</h3>
+              <h3 className="text-3xl font-bold mb-6 text-gradient-silver">Tráfego Orgânico Estratégico</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Construímos uma presença digital sólida e duradoura através de estratégias de SEO avançadas e marketing de conteúdo de alta qualidade. Nosso objetivo é posicionar sua marca no topo dos resultados de busca, gerando tráfego qualificado de forma orgânica e sustentável.
               </p>
@@ -250,7 +250,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
-              <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Criação de Vídeos com Inteligência Artificial</h3>
+              <h3 className="text-3xl font-bold mb-6 text-gradient-silver">Criação de Vídeos com Inteligência Artificial</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Utilizamos tecnologia de ponta em inteligência artificial para criar vídeos profissionais, envolventes e de alta qualidade em tempo recorde. Nossa solução permite produzir conteúdo visual impactante que captura a atenção do seu público e impulsiona o engajamento.
               </p>
@@ -258,7 +258,7 @@ export default function Home() {
                 Do roteiro à edição final, nossa equipe combina criatividade humana com o poder da IA para entregar vídeos que convertem e fortalecem sua marca no ambiente digital.
               </p>
             </div>
-            <div className="relative h-80 rounded-lg overflow-hidden glow-gold">
+            <div className="relative h-80 rounded-lg overflow-hidden border border-glow hover:glow-subtle transition-all">
               <img 
                 src="/ai-video.jpg" 
                 alt="Vídeos com IA" 
@@ -268,7 +268,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1 relative h-80 rounded-lg overflow-hidden glow-gold">
+            <div className="order-2 lg:order-1 relative h-80 rounded-lg overflow-hidden border border-glow hover:glow-subtle transition-all">
               <img 
                 src="/dental-marketing.jpg" 
                 alt="Marketing Odontológico" 
@@ -276,7 +276,7 @@ export default function Home() {
               />
             </div>
             <div className="order-1 lg:order-2">
-              <h3 className="text-3xl font-bold mb-6 text-gradient-gold">Especialistas em Marketing Digital para Clínica Odontológica</h3>
+              <h3 className="text-3xl font-bold mb-6 text-gradient-silver">Especialistas em Marketing Digital para Clínica Odontológica</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Somos especialistas em marketing digital para o setor odontológico. Entendemos as particularidades do mercado e desenvolvemos estratégias específicas para atrair mais pacientes, fortalecer sua autoridade e aumentar a visibilidade da sua clínica.
               </p>
@@ -292,15 +292,15 @@ export default function Home() {
       <section id="contact" className="py-20 bg-card">
         <div className="container max-w-4xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-gold">
-              Faça Seu Orçamento Gratuito
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-silver tracking-wide">
+              Solicite Seu Orçamento
             </h2>
-            <p className="text-muted-foreground text-lg">
-              Preencha o formulário abaixo e nossa equipe entrará em contato para entender suas necessidades e apresentar as melhores soluções
+            <p className="text-muted-foreground text-lg font-light">
+              Preencha o formulário e nossa equipe entrará em contato para estruturar sua estratégia
             </p>
           </div>
 
-          <Card className="bg-background border-border glow-gold">
+          <Card className="bg-card border border-glow hover:glow-subtle transition-all">
             <CardContent className="p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
@@ -313,7 +313,7 @@ export default function Home() {
                     placeholder="Seu nome"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="bg-input border-border"
+                    className="bg-input border-border focus:border-accent focus:glow-subtle"
                     required
                   />
                 </div>
@@ -328,7 +328,7 @@ export default function Home() {
                     placeholder="(00) 00000-0000"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="bg-input border-border"
+                    className="bg-input border-border focus:border-accent focus:glow-subtle"
                     required
                   />
                 </div>
@@ -343,7 +343,7 @@ export default function Home() {
                     placeholder="seu@email.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="bg-input border-border"
+                    className="bg-input border-border focus:border-accent focus:glow-subtle"
                     required
                   />
                 </div>
@@ -356,7 +356,7 @@ export default function Home() {
                     id="service"
                     value={formData.service}
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full px-4 py-2 bg-input border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full px-4 py-2 bg-input border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
                     required
                   >
                     <option value="">Selecione um serviço...</option>
@@ -379,7 +379,7 @@ export default function Home() {
                     placeholder="Descreva suas necessidades e objetivos..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="bg-input border-border min-h-32"
+                    className="bg-input border-border min-h-32 focus:border-accent focus:glow-subtle"
                     required
                   />
                 </div>
@@ -387,7 +387,7 @@ export default function Home() {
                 <Button 
                   type="submit" 
                   size="lg" 
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground glow-gold"
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground glow-silver border border-accent/50 hover:border-accent"
                   disabled={contactMutation.isPending}
                 >
                   {contactMutation.isPending ? (
@@ -406,50 +406,50 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-background border-t border-border py-12 animate-on-scroll">
+      <footer className="bg-card border-t border-border py-12 animate-on-scroll">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 animate-on-scroll">
             <div className="animate-on-scroll">
               <img 
                 src="/logo-magnata-novo.png" 
-                alt="Magnata do Marketing Digital" 
-                className="h-40 mb-4 object-contain footer-animate"
+                alt="Borges Stack Business" 
+                className="h-40 mb-4 object-contain footer-animate opacity-90 hover:opacity-100 transition-opacity"
               />
-              <p className="text-muted-foreground text-sm">
-                Transformando negócios através de estratégias digitais inovadoras e resultados mensuráveis.
+              <p className="text-muted-foreground text-sm font-light">
+                Arquitetura digital estratégica integrando marketing, tecnologia e segurança.
               </p>
             </div>
             
             <div>
-              <h4 className="text-lg font-semibold mb-4 text-primary">Serviços</h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>Tráfego Pago</li>
-                <li>Tráfego Orgânico</li>
-                <li>Vídeos com IA</li>
-                <li>Estratégias Digitais</li>
-                <li>Gestão de Redes Sociais</li>
-                <li>Marketing Odontológico</li>
+              <h4 className="text-lg font-semibold mb-4 text-accent tracking-wide">Serviços</h4>
+              <ul className="space-y-2 text-muted-foreground text-sm">
+                <li className="hover:text-accent transition-colors">Tráfego Pago</li>
+                <li className="hover:text-accent transition-colors">Tráfego Orgânico</li>
+                <li className="hover:text-accent transition-colors">Vídeos com IA</li>
+                <li className="hover:text-accent transition-colors">Estratégias Digitais</li>
+                <li className="hover:text-accent transition-colors">Gestão de Redes Sociais</li>
+                <li className="hover:text-accent transition-colors">Marketing Odontológico</li>
               </ul>
             </div>
             
             <div>
-              <h4 className="text-lg font-semibold mb-4 text-primary">Contato</h4>
+              <h4 className="text-lg font-semibold mb-4 text-accent tracking-wide">Contato</h4>
               <ul className="space-y-3">
                 <li className="flex items-center gap-2 text-muted-foreground">
-                  <Phone className="w-4 h-4 text-primary" />
-                  <a href="https://api.whatsapp.com/send/?phone=5585991778762&text&type=phone_number&app_absent=0" className="hover:text-primary transition-colors">
+                  <Phone className="w-4 h-4 text-accent" />
+                  <a href="https://api.whatsapp.com/send/?phone=5585991778762&text&type=phone_number&app_absent=0" className="hover:text-accent transition-colors text-sm">
                     (85) 9 9177-8762
                   </a>
                 </li>
                 <li className="flex items-center gap-2 text-muted-foreground">
-                  <Mail className="w-4 h-4 text-primary" />
-                  <a href="mailto:magnatadomarketingcontact@gmail.com" className="hover:text-primary transition-colors">
+                  <Mail className="w-4 h-4 text-accent" />
+                  <a href="mailto:magnatadomarketingcontact@gmail.com" className="hover:text-accent transition-colors text-sm">
                     magnatadomarketingcontact@gmail.com
                   </a>
                 </li>
                 <li className="flex items-center gap-2 text-muted-foreground">
-                  <Instagram className="w-4 h-4 text-primary" />
-                  <a href="https://www.instagram.com/guilherme__magnata?igsh=eXJtZzFmcGhkOHdy" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                  <Instagram className="w-4 h-4 text-accent" />
+                  <a href="https://www.instagram.com/guilherme__magnata?igsh=eXJtZzFmcGhkOHdy" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors text-sm">
                     Instagram
                   </a>
                 </li>
@@ -457,8 +457,8 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="border-t border-border pt-8 text-center text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Magnata do Marketing Digital. Todos os direitos reservados.</p>
+          <div className="border-t border-border pt-8 text-center text-muted-foreground text-sm font-light">
+            <p>&copy; {new Date().getFullYear()} Borges Stack Business. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
