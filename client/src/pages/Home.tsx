@@ -143,6 +143,9 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient-silver tracking-widest">
             BORGES STACK<br />BUSINESS
           </h1>
+          <div className="mb-8 flex justify-center">
+            <img src="/borges-logo.webp" alt="Borges Stack Business Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-lg glow-silver" />
+          </div>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto font-light tracking-wide">
             Arquitetura Digital Estratégica | Marketing + Tecnologia + Segurança
           </p>
@@ -411,9 +414,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 animate-on-scroll">
             <div className="animate-on-scroll">
               <img 
-                src="/logo-magnata-novo.png" 
+                src="/borges-logo.webp" 
                 alt="Borges Stack Business" 
-                className="h-40 mb-4 object-contain footer-animate opacity-90 hover:opacity-100 transition-opacity"
+                className="h-40 mb-4 object-contain footer-animate opacity-90 hover:opacity-100 transition-opacity drop-shadow-lg"
               />
               <p className="text-muted-foreground text-sm font-light">
                 Arquitetura digital estratégica integrando marketing, tecnologia e segurança.
