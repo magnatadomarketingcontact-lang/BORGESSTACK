@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BORGES STACK BUSINESS</title>
+    <script>
+        // Redirecionar para index.html mantendo a URL
+        const path = window.location.pathname.replace(/\/$/, '');
+        const basePath = '/BORGESSTACK';
+        
+        if (path !== basePath && path !== basePath + '/') {
+            const newPath = basePath + path + (window.location.search || '');
+            window.location.replace(newPath);
+        } else {
+            window.location.replace(basePath + '/index.html');
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecionando...</p>
+</body>
+</html>
