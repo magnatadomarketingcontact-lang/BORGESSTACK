@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,7 +16,6 @@ import {
   Instagram,
   Loader2
 } from "lucide-react";
-import { toast } from "sonner";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -52,12 +50,16 @@ export default function Home() {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSuccessMessage("");
+    setErrorMessage("");
     
     if (!formData.name || !formData.phone || !formData.email || !formData.service || !formData.message) {
-      toast.error("Por favor, preencha todos os campos.");
+      setErrorMessage("Por favor, preencha todos os campos.");
       return;
     }
 
@@ -76,10 +78,10 @@ export default function Home() {
       }
 
       const data = await response.json();
-      toast.success(data.message || "Mensagem enviada com sucesso! Entraremos em contato em breve.");
+      setSuccessMessage(data.message || "Mensagem enviada com sucesso! Entraremos em contato em breve.");
       setFormData({ name: "", phone: "", email: "", service: "", message: "" });
     } catch (error) {
-      toast.error("Erro ao enviar mensagem. Tente novamente.");
+      setErrorMessage("Erro ao enviar mensagem. Tente novamente.");
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -309,6 +311,18 @@ export default function Home() {
           <p className="text-center text-muted-foreground mb-12 text-lg font-light">
             Preencha o formulário e nossa equipe entrará em contato para estruturar sua estratégia
           </p>
+
+          {successMessage && (
+            <div className="mb-6 p-4 bg-green-900/20 border border-green-500 rounded-md text-green-400">
+              ✓ {successMessage}
+            </div>
+          )}
+
+          {errorMessage && (
+            <div className="mb-6 p-4 bg-red-900/20 border border-red-500 rounded-md text-red-400">
+              ✗ {errorMessage}
+            </div>
+          )}
 
           <Card className="bg-card border border-glow">
             <CardContent className="p-8">
