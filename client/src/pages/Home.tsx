@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
 import { 
   Zap, 
   TrendingUp, 
@@ -12,9 +10,7 @@ import {
   CheckCircle2,
   Mail,
   Phone,
-  Send,
-  Instagram,
-  Loader2
+  Instagram
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -324,8 +320,7 @@ export default function Home() {
             </div>
           )}
 
-          <Card className="bg-card border border-glow">
-            <CardContent className="p-8">
+          <div className="bg-card border border-glow p-8 rounded-lg">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">Nome Completo *</label>
@@ -384,27 +379,15 @@ export default function Home() {
                   />
                 </div>
 
-                <Button
+                <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground glow-silver border border-accent/50 hover:border-accent"
-                  size="lg"
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground glow-silver border border-accent/50 hover:border-accent py-3 px-4 rounded-md font-medium transition disabled:opacity-50"
                 >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Enviando...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4 mr-2" />
-                      Enviar Solicitação
-                    </>
-                  )}
-                </Button>
+                  {isLoading ? "Enviando..." : "Enviar Solicitação"}
+                </button>
               </form>
-            </CardContent>
-          </Card>
+            </div>
         </div>
       </section>
 
