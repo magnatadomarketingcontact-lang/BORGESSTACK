@@ -63,7 +63,7 @@ export default function Home() {
 
     setIsLoading(true);
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('/api/send-contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
