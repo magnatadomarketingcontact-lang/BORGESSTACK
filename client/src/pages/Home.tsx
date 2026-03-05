@@ -161,21 +161,18 @@ export default function Home() {
             Arquitetura Digital Estratégica | Marketing + Tecnologia + Segurança
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-accent hover:bg-accent/90 text-accent-foreground glow-silver text-lg px-8 py-6 border border-accent/50 hover:border-accent"
+            <button 
+              className="bg-accent hover:bg-accent/90 text-accent-foreground glow-silver text-lg px-8 py-6 border border-accent/50 hover:border-accent rounded-lg transition-all"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Solicitar Orçamento
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-accent text-accent hover:bg-accent/10 text-lg px-8 py-6 hover:glow-subtle"
+            </button>
+            <button 
+              className="border border-accent text-accent hover:bg-accent/10 text-lg px-8 py-6 hover:glow-subtle rounded-lg transition-all"
               onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Explorar Serviços
-            </Button>
+            </button>
           </div>
         </div>
       </section>
