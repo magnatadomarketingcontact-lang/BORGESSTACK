@@ -395,21 +395,13 @@ export default function Home() {
                   />
                 </div>
 
-                <Button 
+                <button 
                   type="submit" 
-                  size="lg" 
-                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground glow-silver border border-accent/50 hover:border-accent"
-                  disabled={contactMutation.isPending}
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground glow-silver border border-accent/50 hover:border-accent px-6 py-3 rounded-lg font-semibold transition-all"
                 >
-                  {contactMutation.isPending ? (
-                    "Enviando..."
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5 mr-2" />
-                      Enviar Solicitação
-                    </>
-                  )}
-                </Button>
+                  <Send className="w-5 h-5 mr-2 inline" />
+                  Enviar Solicitação
+                </button>
               </form>
             </CardContent>
           </Card>
