@@ -18,7 +18,7 @@ import {
   Instagram,
   MessageSquare
 } from "lucide-react";
-import { trpc } from "@/lib/trpc";
+
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 
@@ -52,18 +52,7 @@ export default function Home() {
     message: ""
   });
 
-  const contactMutation = trpc.contact.submit.useMutation({
-    onSuccess: () => {
-      toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
-      setFormData({ name: "", phone: "", email: "", service: "", message: "" });
-    },
-    onError: (error: unknown) => {
-      toast.error("Erro ao enviar mensagem. Tente novamente.");
-      console.error(error);
-    }
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.phone || !formData.email || !formData.service || !formData.message) {
@@ -71,7 +60,25 @@ export default function Home() {
       return;
     }
 
-    contactMutation.mutate(formData);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+        setFormData({ name: "", phone: "", email: "", service: "", message: "" });
+      } else {
+        toast.error("Erro ao enviar mensagem. Tente novamente.");
+      }
+    } catch (error) {
+      toast.error("Erro ao enviar mensagem. Tente novamente.");
+      console.error(error);
+    }
   };
 
   const services = [
