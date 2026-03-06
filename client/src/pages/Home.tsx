@@ -125,9 +125,7 @@ export default function Home() {
           </h1>
           
           <div className="mb-8 flex justify-center">
-            <div className="w-40 h-40 md:w-48 md:h-48 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-2xl animate-bounce">
-              <span className="text-8xl">🐉</span>
-            </div>
+            <img src="/borges-logo.webp" alt="Borges Stack Business Logo" className="w-40 h-40 md:w-48 md:h-48 object-contain drop-shadow-2xl animate-bounce" />
           </div>
 
           <p className="text-lg md:text-xl text-gray-300 mb-4 font-light">
