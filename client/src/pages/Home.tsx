@@ -16,6 +16,7 @@ import {
   Loader2
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import logoImage from "../../public/borges-logo.479e8d94.webp";
 
 export default function Home() {
   useEffect(() => {
@@ -158,7 +159,7 @@ export default function Home() {
             BORGES STACK<br />BUSINESS
           </h1>
           <div className="mb-8 flex justify-center">
-            <img src="/borges-logo.479e8d94.webp" alt="Borges Stack Business Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-lg glow-silver" />
+            <img src={logoImage} alt="Borges Stack Business Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-lg glow-silver" />
           </div>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto font-light tracking-wide">
             Arquitetura Digital Estratégica | Marketing + Tecnologia + Segurança
