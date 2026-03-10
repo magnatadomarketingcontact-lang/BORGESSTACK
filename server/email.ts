@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { ENV } from './_core/env';
 
 interface EmailData {
   name: string;
@@ -11,18 +12,27 @@ interface EmailData {
 export async function sendContactEmail(data: EmailData): Promise<boolean> {
   try {
     // Configurar transporter com Gmail
+    const emailUser = ENV.emailUser || 'magnatadomarketingcontact@gmail.com';
+    const emailPassword = (ENV.emailPassword || '').replace(/\s/g, ''); // Remove espaços
+    
+    console.log('📧 Tentando conectar ao Gmail com:', emailUser);
+    console.log('🔑 Senha configurada:', emailPassword ? '✓ Sim' : '✗ Não');
+    console.log('🔑 Tamanho da senha:', emailPassword.length, 'caracteres');
+    
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
       auth: {
-        user: process.env.EMAIL_USER || 'magnatadomarketingcontact@gmail.com',
-        pass: process.env.EMAIL_PASSWORD || ''
+        user: emailUser,
+        pass: emailPassword
       }
     });
 
     // Configurar email
     const mailOptions = {
-      from: process.env.EMAIL_USER || 'magnatadomarketingcontact@gmail.com',
-      to: 'magnatadomarketingcontact@gmail.com',
+      from: emailUser,
+      to: 'guilhermesilvaborges085@gmail.com',
       subject: `Novo contato de ${data.name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #000; color: #fff;">
@@ -53,16 +63,14 @@ export async function sendContactEmail(data: EmailData): Promise<boolean> {
     // Enviar email
     try {
       await transporter.sendMail(mailOptions);
-      console.log('Email enviado com sucesso para:', data.email);
+      console.log('✅ Email enviado com sucesso para:', mailOptions.to);
       return true;
     } catch (sendError) {
-      console.warn('Aviso: Email não pôde ser enviado, mas o contato foi registrado no banco de dados:', sendError);
-      // Retorna true mesmo se o email falhar, pois o contato foi salvo no banco
-      return true;
+      console.error('❌ Erro ao enviar email:', sendError);
+      return false;
     }
   } catch (error) {
     console.error('Erro ao processar contato:', error);
-    // Retorna true mesmo com erro para não bloquear o usuário
-    return true;
+    return false;
   }
 }
