@@ -1,445 +1,316 @@
+import { useAuth } from "@/_core/hooks/useAuth";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
-import { 
-  Zap, 
-  TrendingUp, 
-  Video, 
-  Target, 
-  Users, 
-  Sparkles,
-  CheckCircle2,
-  Mail,
-  Phone,
-  Send,
-  Instagram,
-  Loader2
-} from "lucide-react";
-import { useEffect, useState } from "react";
-import logoImage from "../../public/borges-logo.479e8d94.webp";
+import { Loader2, MessageCircle, Instagram, Mail, Phone, Code2, TrendingUp, Smartphone } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import logoImage from "../../public/happy-nation-logo.png";
 
 export default function Home() {
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => observer.observe(el));
-
-    return () => {
-      elements.forEach(el => observer.unobserve(el));
-    };
-  }, []);
-
+  const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
     service: "",
-    message: ""
+    message: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSuccessMessage("");
-    setErrorMessage("");
-    
-    if (!formData.name || !formData.phone || !formData.email || !formData.service || !formData.message) {
-      setErrorMessage("Por favor, preencha todos os campos.");
-      return;
-    }
-
     setIsLoading(true);
+
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error('Erro ao enviar mensagem');
+      if (response.ok) {
+        toast.success("✓ Contato recebido com sucesso! Entraremos em contato em breve.");
+        setFormData({ name: "", phone: "", email: "", service: "", message: "" });
+      } else {
+        toast.error("Erro ao enviar. Tente novamente.");
       }
-
-      const data = await response.json();
-      setSuccessMessage(data.message || "Mensagem enviada com sucesso! Entraremos em contato em breve.");
-      setFormData({ name: "", phone: "", email: "", service: "", message: "" });
     } catch (error) {
-      setErrorMessage("Erro ao enviar mensagem. Tente novamente.");
-      console.error(error);
+      toast.error("Erro ao enviar o formulário.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const services = [
-    {
-      icon: <Zap className="w-12 h-12" />,
-      title: "Tráfego Pago",
-      description: "Campanhas estratégicas em Google Ads, Facebook Ads e Instagram Ads que geram resultados reais e mensuráveis para o seu negócio.",
-      features: ["ROI Otimizado", "Segmentação Precisa", "Análise de Dados"]
-    },
-    {
-      icon: <TrendingUp className="w-12 h-12" />,
-      title: "Tráfego Orgânico",
-      description: "Estratégias de SEO e marketing de conteúdo que posicionam sua marca no topo dos resultados de busca de forma natural e duradoura.",
-      features: ["SEO Avançado", "Conteúdo Estratégico", "Crescimento Sustentável"]
-    },
-    {
-      icon: <Video className="w-12 h-12" />,
-      title: "Vídeos com IA",
-      description: "Criação de vídeos profissionais utilizando inteligência artificial de última geração para maximizar o engajamento do seu público.",
-      features: ["Tecnologia IA", "Alta Qualidade", "Produção Rápida"]
-    },
-    {
-      icon: <Target className="w-12 h-12" />,
-      title: "Estratégias Digitais",
-      description: "Planejamento completo e execução de estratégias digitais personalizadas que transformam sua presença online em resultados concretos.",
-      features: ["Planejamento 360°", "Análise de Mercado", "Execução Precisa"]
-    },
-    {
-      icon: <Users className="w-12 h-12" />,
-      title: "Gestão de Redes",
-      description: "Gerenciamento profissional das suas redes sociais com conteúdo estratégico que engaja, converte e fideliza sua audiência.",
-      features: ["Conteúdo Criativo", "Engajamento Real", "Crescimento Orgânico"]
-    },
-    {
-      icon: <Sparkles className="w-12 h-12" />,
-      title: "Marketing Odontológico",
-      description: "Especialistas em marketing digital para clínicas odontológicas. Atraímos mais pacientes e fortalecemos sua autoridade no mercado.",
-      features: ["Foco em Resultados", "Captação de Pacientes", "Autoridade Digital"]
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* WhatsApp Fixed Button */}
-      <a
-        href="https://wa.me/5585991778762"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform whatsapp-pulse"
-        aria-label="Contato via WhatsApp"
-      >
-        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.946 1.347l-.355.201-3.68-.965.984 3.595-.235.374a9.86 9.86 0 001.455 5.92 9.88 9.88 0 007.581 3.986h.005c2.917 0 5.649-1.201 7.652-3.369l.36-.355 3.595.984-.96-3.68.374-.235a9.87 9.87 0 00-1.457-5.92 9.879 9.879 0 00-7.589-3.983z"/></svg>
-      </a>
+    <div className="min-h-screen bg-black text-white overflow-hidden">
+      {/* Background glow effect */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
+      </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: "url('/hero-bg.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat"
-          }}
-        >
-          <div className="absolute inset-0 bg-black/70"></div>
-        </div>
-        
-        <div className="container relative z-10 text-center py-20">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient-silver tracking-widest">
-            BORGES STACK<br />BUSINESS
-          </h1>
+      <section className="relative pt-20 pb-32 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto text-center">
+          {/* Logo */}
           <div className="mb-8 flex justify-center">
-            <img src={logoImage} alt="Borges Stack Business Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-lg glow-silver" />
+            <div className="relative inline-block">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full blur-2xl opacity-50"></div>
+              <img 
+                src={logoImage} 
+                alt="Happy Nation Store Logo"
+                className="relative w-48 h-48 object-contain drop-shadow-2xl"
+              />
+            </div>
           </div>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto font-light tracking-wide">
-            Arquitetura Digital Estratégica | Marketing + Tecnologia + Segurança
+
+          {/* Title */}
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black mb-4 tracking-wider">
+            <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg">
+              HAPPY NATION
+            </span>
+            <br />
+            <span className="text-cyan-400 drop-shadow-lg">STORE</span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Acessórios Mobile • Gestão de Tráfego Pago • Desenvolvimento de Mini Sites
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-accent hover:bg-accent/90 text-accent-foreground glow-silver text-lg px-8 py-6 border border-accent/50 hover:border-accent rounded-lg font-semibold transition-all"
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white border-2 border-cyan-400 shadow-lg shadow-cyan-500/50 text-base font-bold"
+              onClick={() => document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" })}
             >
               Solicitar Orçamento
-            </button>
-            <button 
-              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-              className="border border-accent text-accent hover:bg-accent/10 text-lg px-8 py-6 hover:glow-subtle rounded-lg font-semibold transition-all"
+            </Button>
+            <Button 
+              size="lg"
+              variant="outline"
+              className="border-2 border-purple-500 text-purple-400 hover:bg-purple-500/10 text-base font-bold"
+              onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
             >
               Explorar Serviços
-            </button>
+            </Button>
           </div>
+
+          {/* WhatsApp Button */}
+          <a 
+            href="https://wa.me/558599177876?text=Olá%20Happy%20Nation!%20Gostaria%20de%20conhecer%20seus%20serviços"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fixed bottom-8 right-8 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-full p-4 shadow-lg shadow-green-500/50 hover:scale-110 transition-transform z-50"
+          >
+            <MessageCircle size={28} />
+          </a>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-card">
-        <div className="container">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gradient-silver tracking-wide">
-            Soluções Estratégicas
+      <section id="services" className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-black text-center mb-16">
+            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              Nossos Serviços
+            </span>
           </h2>
-          <p className="text-center text-muted-foreground mb-16 text-lg max-w-2xl mx-auto font-light">
-            Serviços integrados de marketing digital, desenvolvimento e segurança
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card
-                key={index}
-                className="animate-on-scroll bg-card border border-glow hover:border-accent transition-all duration-300 hover:glow-subtle group"
-              >
-                <CardContent className="p-8">
-                  <div className="text-accent mb-6 group-hover:scale-110 transition-transform">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gradient-silver">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-sm">
-                        <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
-                        <span className="text-foreground/80">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Service 1 */}
+            <Card className="bg-gradient-to-br from-gray-900 to-black border-2 border-cyan-500/50 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/30 transition-all p-6 group">
+              <div className="mb-4 inline-block p-3 bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 rounded-lg group-hover:from-cyan-500/40 group-hover:to-cyan-600/40 transition-all">
+                <Smartphone className="text-cyan-400" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-3 text-cyan-400">Acessórios Mobile</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Produtos premium para seu celular com qualidade garantida e preços competitivos.
+              </p>
+            </Card>
+
+            {/* Service 2 */}
+            <Card className="bg-gradient-to-br from-gray-900 to-black border-2 border-purple-500/50 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/30 transition-all p-6 group">
+              <div className="mb-4 inline-block p-3 bg-gradient-to-br from-purple-500/20 to-purple-600/20 rounded-lg group-hover:from-purple-500/40 group-hover:to-purple-600/40 transition-all">
+                <TrendingUp className="text-purple-400" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-3 text-purple-400">Gestão de Tráfego Pago</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Estratégias comprovadas para aumentar suas vendas com ROI máximo em Google Ads e Facebook.
+              </p>
+            </Card>
+
+            {/* Service 3 */}
+            <Card className="bg-gradient-to-br from-gray-900 to-black border-2 border-pink-500/50 hover:border-pink-400 hover:shadow-lg hover:shadow-pink-500/30 transition-all p-6 group">
+              <div className="mb-4 inline-block p-3 bg-gradient-to-br from-pink-500/20 to-pink-600/20 rounded-lg group-hover:from-pink-500/40 group-hover:to-pink-600/40 transition-all">
+                <Code2 className="text-pink-400" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-3 text-pink-400">Mini Sites</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Desenvolvimento rápido de sites otimizados para conversão e mobile-first design.
+              </p>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Service Details Section */}
-      <section className="py-20">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-            <div>
-              <h3 className="text-3xl font-bold mb-6 text-gradient-silver">Tráfego Pago de Alta Performance</h3>
-              <p className="text-muted-foreground mb-4 leading-relaxed">
-                Desenvolvemos campanhas de tráfego pago altamente segmentadas e otimizadas para maximizar seu retorno sobre investimento. Utilizamos as melhores práticas do mercado e análise de dados em tempo real para garantir que cada centavo investido gere resultados mensuráveis.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Nossa expertise abrange Google Ads, Facebook Ads, Instagram Ads e outras plataformas, sempre com foco em conversão e crescimento sustentável do seu negócio.
-              </p>
-            </div>
-            <div className="relative h-80 rounded-lg overflow-hidden glow-gold">
-              <img 
-                src="/traffic-paid.jpg" 
-                alt="Tráfego Pago" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
+      {/* Contact Form Section */}
+      <section id="contact-form" className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-gradient-to-br from-gray-900/50 to-black/50 border-2 border-cyan-500/30 rounded-2xl p-8 backdrop-blur-sm">
+            <h2 className="text-3xl sm:text-4xl font-black mb-2 text-center">
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                Solicitar Orçamento
+              </span>
+            </h2>
+            <p className="text-gray-400 text-center mb-8">Preencha o formulário e nossa equipe entrará em contato</p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-            <div className="order-2 lg:order-1 relative h-80 rounded-lg overflow-hidden glow-gold">
-              <img 
-                src="/traffic-organic.jpg" 
-                alt="Tráfego Orgânico" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="order-1 lg:order-2">
-              <h3 className="text-3xl font-bold mb-6 text-gradient-silver">Tráfego Orgânico Estratégico</h3>
-              <p className="text-muted-foreground mb-4 leading-relaxed">
-                Construímos uma presença digital sólida e duradoura através de estratégias de SEO avançadas e marketing de conteúdo de alta qualidade. Nosso objetivo é posicionar sua marca no topo dos resultados de busca, gerando tráfego qualificado de forma orgânica e sustentável.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Combinamos técnicas de otimização on-page, off-page e criação de conteúdo relevante para construir autoridade digital e atrair seu público ideal.
-              </p>
-            </div>
-          </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name */}
+              <div>
+                <label className="block text-sm font-semibold text-cyan-400 mb-2">Nome Completo *</label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder="Seu nome"
+                  required
+                  className="bg-gray-900/50 border-2 border-cyan-500/30 focus:border-cyan-400 text-white placeholder-gray-500 rounded-lg"
+                />
+              </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-3xl font-bold mb-6 text-gradient-silver">Criação de Vídeos com Inteligência Artificial</h3>
-              <p className="text-muted-foreground mb-4 leading-relaxed">
-                Utilizamos tecnologia de ponta em inteligência artificial para criar vídeos profissionais, envolventes e de alta qualidade em tempo recorde. Nossa solução permite produzir conteúdo visual impactante que captura a atenção do seu público e impulsiona o engajamento.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Do roteiro à edição final, nossa equipe combina criatividade humana com o poder da IA para entregar vídeos que convertem e fortalecem sua marca no ambiente digital.
-              </p>
-            </div>
-            <div className="relative h-80 rounded-lg overflow-hidden glow-gold">
-              <img 
-                src="/ai-video.jpg" 
-                alt="Vídeos com IA" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+              {/* Phone */}
+              <div>
+                <label className="block text-sm font-semibold text-purple-400 mb-2">Telefone *</label>
+                <Input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  placeholder="(00) 00000-0000"
+                  required
+                  className="bg-gray-900/50 border-2 border-purple-500/30 focus:border-purple-400 text-white placeholder-gray-500 rounded-lg"
+                />
+              </div>
 
-      {/* Dental Marketing Section */}
-      <section className="py-20 bg-card">
-        <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <h3 className="text-3xl font-bold mb-6 text-gradient-silver text-center">Especialistas em Marketing Digital para Clínica Odontológica</h3>
-            <p className="text-muted-foreground mb-4 leading-relaxed text-center">
-              Somos especialistas em marketing digital para o setor odontológico. Entendemos as particularidades do mercado e desenvolvemos estratégias específicas para atrair mais pacientes, fortalecer sua autoridade e aumentar a visibilidade da sua clínica.
-            </p>
-            <p className="text-muted-foreground leading-relaxed text-center">
-              Nossa abordagem combina captação de leads qualificados, gestão de reputação online, marketing de conteúdo especializado e campanhas de tráfego pago direcionadas para transformar sua clínica em referência na região.
-            </p>
-          </div>
-        </div>
-      </section>
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-semibold text-pink-400 mb-2">Email *</label>
+                <Input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="seu@email.com"
+                  required
+                  className="bg-gray-900/50 border-2 border-pink-500/30 focus:border-pink-400 text-white placeholder-gray-500 rounded-lg"
+                />
+              </div>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20">
-        <div className="container max-w-2xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gradient-silver tracking-wide">
-            Solicite Seu Orçamento
-          </h2>
-          <p className="text-center text-muted-foreground mb-12 text-lg font-light">
-            Preencha o formulário e nossa equipe entrará em contato para estruturar sua estratégia
-          </p>
-
-          {successMessage && (
-            <div className="mb-6 p-4 bg-green-900/20 border border-green-500 rounded-md text-green-400">
-              ✓ {successMessage}
-            </div>
-          )}
-
-          {errorMessage && (
-            <div className="mb-6 p-4 bg-red-900/20 border border-red-500 rounded-md text-red-400">
-              ✗ {errorMessage}
-            </div>
-          )}
-
-          <Card className="bg-card border border-glow">
-            <CardContent className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Nome Completo *</label>
-                  <Input
-                    placeholder="Seu nome"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="bg-background border-glow"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">Número de Telefone *</label>
-                  <Input
-                    type="tel"
-                    placeholder="(00) 00000-0000"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="bg-background border-glow"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">Email *</label>
-                  <Input
-                    type="email"
-                    placeholder="seu@email.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="bg-background border-glow"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">Qual serviço você está interessado? *</label>
-                  <select
-                    value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full px-4 py-2 bg-background border border-glow rounded-md text-foreground"
-                  >
-                    <option value="">Selecione um serviço...</option>
-                    <option value="Tráfego Pago">Tráfego Pago</option>
-                    <option value="Tráfego Orgânico">Tráfego Orgânico</option>
-                    <option value="Vídeos com IA">Vídeos com IA</option>
-                    <option value="Estratégias Digitais">Estratégias Digitais</option>
-                    <option value="Gestão de Redes">Gestão de Redes</option>
-                    <option value="Marketing Odontológico">Marketing Odontológico</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">O que está precisando na empresa? *</label>
-                  <Textarea
-                    placeholder="Descreva suas necessidades e objetivos..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="bg-background border-glow min-h-32"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-accent hover:bg-accent/90 disabled:bg-gray-500 text-accent-foreground glow-silver border border-accent/50 hover:border-accent rounded-lg py-3 font-semibold transition-all flex items-center justify-center gap-2"
+              {/* Service */}
+              <div>
+                <label className="block text-sm font-semibold text-cyan-400 mb-2">Qual serviço você está interessado? *</label>
+                <select
+                  name="service"
+                  value={formData.service}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full bg-gray-900/50 border-2 border-cyan-500/30 focus:border-cyan-400 text-white rounded-lg p-3"
                 >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      Enviando...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      Enviar Solicitação
-                    </>
-                  )}
-                </button>
-              </form>
-            </CardContent>
-          </Card>
+                  <option value="">Selecione um serviço...</option>
+                  <option value="Acessórios Mobile">Acessórios Mobile</option>
+                  <option value="Gestão de Tráfego Pago">Gestão de Tráfego Pago</option>
+                  <option value="Desenvolvimento de Mini Sites">Desenvolvimento de Mini Sites</option>
+                  <option value="Outro">Outro</option>
+                </select>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-sm font-semibold text-purple-400 mb-2">Mensagem *</label>
+                <Textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  placeholder="Conte-nos mais sobre sua necessidade..."
+                  required
+                  className="bg-gray-900/50 border-2 border-purple-500/30 focus:border-purple-400 text-white placeholder-gray-500 rounded-lg min-h-32"
+                />
+              </div>
+
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 hover:from-cyan-600 hover:via-purple-600 hover:to-pink-600 text-white font-bold text-lg py-6 shadow-lg shadow-cyan-500/50 hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 animate-spin" size={20} />
+                    Enviando...
+                  </>
+                ) : (
+                  "Enviar Solicitação"
+                )}
+              </Button>
+            </form>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-glow py-12">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <footer className="relative border-t border-cyan-500/20 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            {/* Contact Info */}
             <div>
-              <h4 className="text-lg font-bold text-gradient-silver mb-4">Contato</h4>
-              <div className="space-y-2">
-                <a href="tel:+5585991778762" className="flex items-center gap-2 text-muted-foreground hover:text-accent transition">
-                  <Phone className="w-4 h-4" />
+              <h3 className="text-lg font-bold text-cyan-400 mb-4">Contato</h3>
+              <div className="space-y-3">
+                <a href="tel:+558599177876" className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors">
+                  <Phone size={18} />
                   (85) 9 9177-8762
                 </a>
-                <a href="mailto:magnatadomarketingcontact@gmail.com" className="flex items-center gap-2 text-muted-foreground hover:text-accent transition">
-                  <Mail className="w-4 h-4" />
-                  magnatadomarketingcontact@gmail.com
+                <a href="mailto:happynationstory@gmail.com" className="flex items-center gap-2 text-gray-300 hover:text-purple-400 transition-colors">
+                  <Mail size={18} />
+                  happynationstory@gmail.com
                 </a>
               </div>
             </div>
-            
+
+            {/* Social Media */}
             <div>
-              <h4 className="text-lg font-bold text-gradient-silver mb-4">Redes Sociais</h4>
-              <a href="https://instagram.com/borgesstack" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-accent transition">
-                <Instagram className="w-4 h-4" />
-                @borgesstack
-              </a>
+              <h3 className="text-lg font-bold text-purple-400 mb-4">Redes Sociais</h3>
+              <div className="flex gap-4">
+                <a href="https://instagram.com/happynationstore" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-pink-400 transition-colors">
+                  <Instagram size={24} />
+                </a>
+                <a href="https://wa.me/558599177876" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-green-400 transition-colors">
+                  <MessageCircle size={24} />
+                </a>
+              </div>
             </div>
 
+            {/* About */}
             <div>
-              <h4 className="text-lg font-bold text-gradient-silver mb-4">Empresa</h4>
-              <p className="text-muted-foreground">Transformando negócios através de estratégias digitais robustas e inovadoras</p>
+              <h3 className="text-lg font-bold text-pink-400 mb-4">Sobre</h3>
+              <p className="text-gray-300 text-sm leading-relaxed">
+                Happy Nation Store - Sua solução completa em acessórios mobile, marketing digital e desenvolvimento web.
+              </p>
             </div>
           </div>
 
-          <div className="border-t border-glow pt-8 text-center text-muted-foreground">
-            <p>&copy; 2026 BORGES STACK BUSINESS. Todos os direitos reservados.</p>
+          {/* Copyright */}
+          <div className="border-t border-cyan-500/20 pt-8 text-center text-gray-500 text-sm">
+            <p>&copy; 2026 Happy Nation Store. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>

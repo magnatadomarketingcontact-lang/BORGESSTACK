@@ -32,7 +32,7 @@ export async function sendContactEmail(data: EmailData): Promise<boolean> {
     // Configurar email
     const mailOptions = {
       from: emailUser,
-      to: 'guilhermesilvaborges085@gmail.com',
+      to: 'happynationstory@gmail.com',
       subject: `Novo contato de ${data.name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #000; color: #fff;">
