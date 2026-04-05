@@ -98,6 +98,14 @@ export default function Home() {
               size="lg"
               variant="outline"
               className="border-2 border-purple-500 text-purple-400 hover:bg-purple-500/10 text-base font-bold"
+              onClick={() => window.location.href = '/loja'}
+            >
+              Loja Online
+            </Button>
+            <Button 
+              size="lg"
+              variant="outline"
+              className="border-2 border-pink-500 text-pink-400 hover:bg-pink-500/10 text-base font-bold"
               onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
             >
               Explorar Serviços
@@ -106,10 +114,10 @@ export default function Home() {
 
           {/* WhatsApp Button */}
           <a 
-            href="https://wa.me/558599177876?text=Olá%20Happy%20Nation!%20Gostaria%20de%20conhecer%20seus%20serviços"
+            href="https://wa.me/+5585991778762"
             target="_blank"
             rel="noopener noreferrer"
-            className="fixed bottom-8 right-8 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-full p-4 shadow-lg shadow-green-500/50 hover:scale-110 transition-transform z-50"
+            className="fixed bottom-8 right-8 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-full p-4 shadow-lg shadow-green-500/50 hover:scale-110 transition-transform z-50 whatsapp-pulse"
           >
             <MessageCircle size={28} />
           </a>
@@ -275,7 +283,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-bold text-cyan-400 mb-4">Contato</h3>
               <div className="space-y-3">
-                <a href="tel:+558599177876" className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors">
+                <a href="https://wa.me/+5585991778762" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors">
                   <Phone size={18} />
                   (85) 9 9177-8762
                 </a>
@@ -290,10 +298,10 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-bold text-purple-400 mb-4">Redes Sociais</h3>
               <div className="flex gap-4">
-                <a href="https://instagram.com/happynationstore" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-pink-400 transition-colors">
+                <a href="https://www.instagram.com/happynationstory?igsh=Zmc5dmF3ZmMybXN2" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-pink-400 transition-colors">
                   <Instagram size={24} />
                 </a>
-                <a href="https://wa.me/558599177876" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-green-400 transition-colors">
+                <a href="https://wa.me/+5585991778762" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-green-400 transition-colors">
                   <MessageCircle size={24} />
                 </a>
               </div>
