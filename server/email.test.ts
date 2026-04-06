@@ -1,19 +1,17 @@
-import { describe, it, expect } from 'vitest';
-import { sendContactEmail } from './email';
+import { describe, it, expect } from "vitest";
+import { sendContactEmail } from "./email";
 
-describe('Email Service', () => {
-  it('should send contact email successfully', async () => {
-    const testData = {
-      name: 'Teste User',
-      phone: '(85) 9 9126-6516',
-      email: 'test@example.com',
-      service: 'Tráfego Pago',
-      message: 'Este é um email de teste para validar o sistema de envio.'
-    };
+describe("Email Service", () => {
+  it("should send contact email successfully", async () => {
+    const result = await sendContactEmail({
+      name: "Teste User",
+      email: "teste@example.com",
+      phone: "(85) 99177-8762",
+      service: "Acessórios Mobile",
+      message: "Teste de envio de email via Resend",
+    });
 
-    const result = await sendContactEmail(testData);
-    
+    console.log("📧 Resultado do teste:", result ? "✅ Sucesso" : "❌ Falha");
     expect(result).toBe(true);
-    console.log('✅ Email enviado com sucesso!');
   });
 });
