@@ -6,10 +6,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Loader2, MessageCircle, Instagram, Mail, Phone, Code2, TrendingUp, Smartphone } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import logoImage from "../../public/happy-nation-logo.png";
+import { trpc } from "@/lib/trpc";
 
 export default function Home() {
-  const { user } = useAuth();
+  const submitContact = trpc.contact.submit.useMutation();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -19,30 +19,51 @@ export default function Home() {
     message: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.currentTarget.value;
+    console.log('Service selected:', value);
+    setFormData(prev => ({ ...prev, service: value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validar se o serviço foi selecionado
+    if (!formData.service) {
+      toast.error("Por favor, selecione um serviço.");
+      return;
+    }
+    
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      console.log('Enviando contato:', formData);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(formData),
       });
-
-      if (response.ok) {
-        toast.success("✓ Contato recebido com sucesso! Entraremos em contato em breve.");
-        setFormData({ name: "", phone: "", email: "", service: "", message: "" });
-      } else {
-        toast.error("Erro ao enviar. Tente novamente.");
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erro ao enviar o formulário');
       }
+      
+      const data = await response.json();
+      toast.success("✓ Contato recebido com sucesso! Entraremos em contato em breve.");
+      setFormData({ name: "", phone: "", email: "", service: "", message: "" });
     } catch (error) {
-      toast.error("Erro ao enviar o formulário.");
+      console.error("Erro ao enviar:", error);
+      const errorMessage = error instanceof Error ? error.message : "Erro ao enviar o formulário.";
+      console.error("Error details:", { error, errorMessage });
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -64,7 +85,7 @@ export default function Home() {
             <div className="relative inline-block">
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full blur-2xl opacity-50"></div>
               <img 
-                src={logoImage} 
+                src="/happy-nation-logo.png" 
                 alt="Happy Nation Store Logo"
                 className="relative w-48 h-48 object-contain drop-shadow-2xl"
               />
@@ -230,7 +251,7 @@ export default function Home() {
                 <select
                   name="service"
                   value={formData.service}
-                  onChange={handleInputChange}
+                  onChange={handleSelectChange}
                   required
                   className="w-full bg-gray-900/50 border-2 border-cyan-500/30 focus:border-cyan-400 text-white rounded-lg p-3"
                 >

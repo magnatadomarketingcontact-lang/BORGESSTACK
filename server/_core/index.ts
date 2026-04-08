@@ -35,7 +35,46 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+  
+  // REST endpoint for contact form
+  app.post('/api/contact', async (req, res) => {
+    try {
+      const { name, phone, email, service, message } = req.body;
+      
+      // Validacao basica
+      if (!name || !phone || !email || !service || !message) {
+        return res.status(400).json({ error: 'Todos os campos sao obrigatorios' });
+      }
+      
+      // Salvar no banco de dados
+      const { createContact } = await import('../db');
+      await createContact({ name, phone, email, service, message });
+      
+      // Enviar email
+      const { sendContactEmail } = await import('../email');
+      await sendContactEmail({ name, phone, email, service, message });
+      
+      res.json({ success: true, message: 'Contato recebido com sucesso!' });
+    } catch (error) {
+      console.error('Erro ao processar contato:', error);
+      console.error('Stack:', (error as Error).stack);
+      res.status(500).json({ error: 'Erro ao processar sua solicitacao', details: (error as Error).message });
+    }
+  });
   // tRPC API
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api/trpc')) {
+      console.log('[tRPC Request]', {
+        method: req.method,
+        path: req.path,
+        contentType: req.headers['content-type'],
+        bodyKeys: Object.keys(req.body || {}),
+        bodyType: typeof req.body,
+        body: req.body,
+      });
+    }
+    next();
+  });
   app.use(
     "/api/trpc",
     createExpressMiddleware({
