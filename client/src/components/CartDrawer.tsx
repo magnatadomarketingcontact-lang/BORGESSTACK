@@ -14,7 +14,7 @@ interface CartDrawerProps {
   onClose: () => void;
 }
 
-const WHATSAPP_NUMBER = '5585991126516';
+const WHATSAPP_NUMBER = '5585991778762';
 const PIX_DISCOUNT_PERCENT = 10;
 
 export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
