@@ -3,7 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
-import { createContact } from "./db";
+import { createContact, getAllProducts, getProductById } from "./db";
 import { sendContactEmail } from "./email";
 
 export const appRouter = router({
@@ -55,6 +55,29 @@ export const appRouter = router({
         } catch (error) {
           console.error("Erro ao processar contato:", error);
           throw new Error("Erro ao processar sua solicitação");
+        }
+      }),
+  }),
+
+  products: router({
+    list: publicProcedure.query(async () => {
+      try {
+        const products = await getAllProducts();
+        return products;
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+        return [];
+      }
+    }),
+    getById: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ input }) => {
+        try {
+          const product = await getProductById(input.id);
+          return product || null;
+        } catch (error) {
+          console.error("Erro ao buscar produto:", error);
+          return null;
         }
       }),
   }),

@@ -74,6 +74,9 @@
 - [ ] Testar site em produção
 - [ ] Monitorar performance e erros
 
+## Loja Online
+- [x] Adicionar produto: Fone de Ouvido Bluetooth Xiaomi Redmi Airdots 2 (R$ 35,00)
+
 ## Integração Stripe
 - [ ] Configurar Stripe no projeto
 - [ ] Criar schema de produtos e pedidos

@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, InsertContact, contacts } from "../drizzle/schema";
+import { InsertUser, users, InsertContact, contacts, InsertProduct, products } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -106,4 +106,33 @@ export async function getAllContacts() {
   }
 
   return await db.select().from(contacts).orderBy(contacts.createdAt);
+}
+
+export async function createProduct(product: InsertProduct) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  const result = await db.insert(products).values(product);
+  return result;
+}
+
+export async function getAllProducts() {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  return await db.select().from(products).orderBy(products.createdAt);
+}
+
+export async function getProductById(id: number) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  const result = await db.select().from(products).where(eq(products.id, id)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
 }

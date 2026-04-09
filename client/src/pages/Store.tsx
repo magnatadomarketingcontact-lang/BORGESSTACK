@@ -1,15 +1,9 @@
 import { useState, useMemo } from 'react';
-import { Search, ShoppingBag, Headphones, Zap, Shield } from 'lucide-react';
+import { Search, ShoppingBag, Headphones, Zap, Shield, Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-
-interface Product {
-  id: string;
-  name: string;
-  category: 'fones' | 'carregadores' | 'capinhas';
-  description: string;
-}
+import { trpc } from '@/lib/trpc';
 
 const CATEGORIES = [
   { id: 'fones', name: 'Fones Bluetooth', icon: Headphones, color: 'from-cyan-500 to-blue-500' },
@@ -17,38 +11,26 @@ const CATEGORIES = [
   { id: 'capinhas', name: 'Capinhas', icon: Shield, color: 'from-pink-500 to-rose-500' },
 ];
 
-const PRODUCTS: Product[] = [
-  // Fones Bluetooth
-  { id: '1', name: 'Fone Bluetooth Premium', category: 'fones', description: 'Fone de ouvido sem fio com cancelamento de ruído' },
-  { id: '2', name: 'Fone Bluetooth Esportivo', category: 'fones', description: 'Fone resistente à água para atividades físicas' },
-  { id: '3', name: 'Fone Bluetooth Gamer', category: 'fones', description: 'Fone com microfone integrado para games' },
-  { id: '4', name: 'Fone Bluetooth Compacto', category: 'fones', description: 'Fone pequeno e portátil' },
-  
-  // Carregadores
-  { id: '5', name: 'Carregador Rápido USB-C', category: 'carregadores', description: 'Carregador com tecnologia de carregamento rápido' },
-  { id: '6', name: 'Carregador Wireless', category: 'carregadores', description: 'Carregador por indução sem fio' },
-  { id: '7', name: 'Carregador Portátil Power Bank', category: 'carregadores', description: 'Bateria externa de alta capacidade' },
-  { id: '8', name: 'Carregador Veicular', category: 'carregadores', description: 'Carregador para carro com múltiplas portas' },
-  
-  // Capinhas
-  { id: '9', name: 'Capinha Silicone Colorida', category: 'capinhas', description: 'Capinha de silicone com design moderno' },
-  { id: '10', name: 'Capinha Couro Premium', category: 'capinhas', description: 'Capinha de couro genuíno com proteção total' },
-  { id: '11', name: 'Capinha Transparente', category: 'capinhas', description: 'Capinha cristal que mostra o design do celular' },
-  { id: '12', name: 'Capinha Antichoque', category: 'capinhas', description: 'Capinha com proteção contra quedas' },
-];
-
 export default function Store() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  
+  // Buscar produtos do banco de dados
+  const { data: products = [], isLoading } = trpc.products.list.useQuery();
 
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter(product => {
+    return products.filter(product => {
       const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           product.description.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = !selectedCategory || product.category === selectedCategory;
+                           (product.description?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false);
+      const matchesCategory = !selectedCategory || product.category.toLowerCase().includes(selectedCategory.toLowerCase());
       return matchesSearch && matchesCategory;
     });
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory, products]);
+
+  const getCategoryIcon = (category: string) => {
+    const cat = CATEGORIES.find(c => c.id === category.toLowerCase());
+    return cat?.icon || ShoppingBag;
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -102,7 +84,12 @@ export default function Store() {
 
       {/* Products Grid */}
       <div className="container py-12">
-        {filteredProducts.length === 0 ? (
+        {isLoading ? (
+          <div className="text-center py-12">
+            <Loader2 className="w-12 h-12 mx-auto text-cyan-500 mb-4 animate-spin" />
+            <p className="text-gray-400 text-lg">Carregando produtos...</p>
+          </div>
+        ) : filteredProducts.length === 0 ? (
           <div className="text-center py-12">
             <ShoppingBag className="w-12 h-12 mx-auto text-cyan-500/30 mb-4" />
             <p className="text-gray-400 text-lg">Nenhum produto encontrado</p>
@@ -116,47 +103,60 @@ export default function Store() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product) => {
-                const category = CATEGORIES.find(c => c.id === product.category);
-                const Icon = category?.icon || ShoppingBag;
+                const Icon = getCategoryIcon(product.category);
+                const price = typeof product.price === 'string' ? parseFloat(product.price) : product.price;
                 
                 return (
                   <Card
                     key={product.id}
                     className="bg-gradient-to-br from-black to-black/50 border-2 border-cyan-500/30 hover:border-cyan-500/60 transition-all duration-300 overflow-hidden group hover:glow-cyan"
                   >
-                    {/* Product Image Placeholder */}
+                    {/* Product Image */}
                     <div className="h-48 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border-b border-cyan-500/20 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5 group-hover:from-cyan-500/10 group-hover:to-purple-500/10 transition-all duration-300" />
-                      <Icon className="w-16 h-16 text-cyan-400/40 group-hover:text-cyan-400/60 transition-colors" />
+                      {product.imageUrl ? (
+                        <img 
+                          src={product.imageUrl} 
+                          alt={product.name}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      ) : (
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5 group-hover:from-cyan-500/10 group-hover:to-purple-500/10 transition-all duration-300" />
+                          <Icon className="w-16 h-16 text-cyan-400/40 group-hover:text-cyan-400/60 transition-colors" />
+                        </>
+                      )}
                     </div>
 
                     {/* Product Info */}
                     <div className="p-5">
                       <div className="flex items-start justify-between gap-3 mb-3">
                         <div className="flex-1">
-                          <h3 className="font-bold text-lg text-white mb-1 group-hover:text-cyan-300 transition-colors">
+                          <h3 className="font-bold text-lg text-white mb-1 group-hover:text-cyan-300 transition-colors line-clamp-2">
                             {product.name}
                           </h3>
                           <p className="text-xs text-cyan-400 font-semibold uppercase tracking-wider">
-                            {category?.name}
+                            {product.category}
                           </p>
                         </div>
                       </div>
 
-                      <p className="text-sm text-gray-400 mb-4 line-clamp-2">
-                        {product.description}
-                      </p>
+                      {product.description && (
+                        <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+                          {product.description}
+                        </p>
+                      )}
 
-                      {/* Placeholder for Price */}
+                      {/* Price */}
                       <div className="h-8 bg-black/50 border border-cyan-500/20 rounded flex items-center justify-center mb-4">
-                        <span className="text-xs text-gray-500">Preço será adicionado em breve</span>
+                        <span className="text-lg font-bold text-cyan-400">
+                          R$ {price.toFixed(2).replace('.', ',')}
+                        </span>
                       </div>
 
                       <Button
-                        disabled
-                        className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-black font-bold opacity-50 cursor-not-allowed"
+                        className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-black font-bold hover:from-cyan-600 hover:to-purple-600 transition-all"
                       >
-                        Indisponível
+                        Adicionar ao Carrinho
                       </Button>
                     </div>
                   </Card>
@@ -171,10 +171,10 @@ export default function Store() {
       <div className="border-t border-cyan-500/20 bg-black/50 backdrop-blur">
         <div className="container py-8 text-center">
           <p className="text-gray-400 mb-2">
-            Os produtos serão adicionados em breve com preços e imagens
+            Loja online com produtos selecionados
           </p>
           <p className="text-sm text-cyan-400">
-            Acompanhe nossas redes sociais para atualizações
+            Acompanhe nossas redes sociais para novas adições
           </p>
         </div>
       </div>
