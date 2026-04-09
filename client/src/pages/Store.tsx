@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { trpc } from '@/lib/trpc';
+import CartDrawer from '@/components/CartDrawer';
 
 const CATEGORIES = [
   { id: 'fones', name: 'Fones Bluetooth', icon: Headphones, color: 'from-cyan-500 to-blue-500' },
@@ -14,6 +15,7 @@ const CATEGORIES = [
 export default function Store() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   
   // Buscar produtos do banco de dados
   const { data: products = [], isLoading } = trpc.products.list.useQuery();
@@ -154,6 +156,30 @@ export default function Store() {
                       </div>
 
                       <Button
+                        onClick={() => {
+                          // Adicionar ao carrinho
+                          const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                          const existingItem = cart.find((item: any) => item.id === product.id);
+                          
+                          if (existingItem) {
+                            existingItem.quantity += 1;
+                          } else {
+                            cart.push({
+                              id: product.id,
+                              name: product.name,
+                              price: product.price,
+                              imageUrl: product.imageUrl,
+                              quantity: 1,
+                            });
+                          }
+                          
+                          localStorage.setItem('cart', JSON.stringify(cart));
+                          setIsCartOpen(true);
+                          
+                          // Toast de confirmação
+                          const event = new CustomEvent('cartUpdated', { detail: { product: product.name } });
+                          window.dispatchEvent(event);
+                        }}
                         className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-black font-bold hover:from-cyan-600 hover:to-purple-600 transition-all"
                       >
                         Adicionar ao Carrinho
@@ -178,6 +204,9 @@ export default function Store() {
           </p>
         </div>
       </div>
+
+      {/* Cart Drawer */}
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </div>
   );
 }

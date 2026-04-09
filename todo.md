@@ -77,6 +77,12 @@
 ## Loja Online
 - [x] Adicionar produto: Fone de Ouvido Bluetooth Xiaomi Redmi Airdots 2 (R$ 35,00)
 
+## Carrinho de Compras
+- [x] Criar componente Cart com Drawer
+- [x] Implementar cálculo de valores e desconto PIX
+- [x] Integrar WhatsApp e LocalStorage
+- [x] Testar e validar funcionalidade completa
+
 ## Integração Stripe
 - [ ] Configurar Stripe no projeto
 - [ ] Criar schema de produtos e pedidos
